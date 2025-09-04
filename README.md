@@ -89,6 +89,13 @@ In order to make the configuration easier, the plugin adds a new dock to the bot
 
 > :warning: Beware of not changing the Game Id and submitting by mistake, since that will break the integration with Google Game Services.
 
+
+Make sure to add this in the start of your game:
+```gdscript
+func _enter_tree() -> void:
+	GodotPlayGameServices.initialize()
+```
+
 ### Export configuration
 To be able to use the plugin, you need to use a **custom gradle build**. Please note that The steps to do so, are explained with detail in the [Godot Documentation](https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html).
 
