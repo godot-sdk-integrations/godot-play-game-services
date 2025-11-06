@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxnmbeo2w51s3"]
 
-[ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_smv14"]
+[ext_resource type="Script" uid="uid://bfpplttsjtuh2" path="res://scenes/MainMenu.gd" id="1_smv14"]
 [ext_resource type="Theme" uid="uid://bmm3mvq11y045" path="res://theme.tres" id="2_aajnr"]
-[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="3_32bum"]
+[ext_resource type="Script" uid="uid://d0c7icjnmf7ya" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="3_32bum"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
