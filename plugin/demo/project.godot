@@ -17,7 +17,7 @@ You will need to configure the game integrations in your Google Play Console in 
 config/version="v1.0.0"
 config/tags=PackedStringArray("demo", "android", "google_play_games_services")
 run/main_scene="res://scenes/MainMenu.tscn"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]

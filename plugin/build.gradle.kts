@@ -48,18 +48,18 @@ val copyDebugAARToDemoAddons by tasks.registering(Copy::class) {
     description = "Copies the generated debug AAR binary to the plugin's addons directory"
     from("build/outputs/aar")
     include("$pluginName-debug.aar")
-    into("../demo/addons/$pluginName/bin/debug")
+    into("demo/addons/$pluginName/bin/debug")
 }
 
 val copyReleaseAARToDemoAddons by tasks.registering(Copy::class) {
     description = "Copies the generated release AAR binary to the plugin's addons directory"
     from("build/outputs/aar")
     include("$pluginName-release.aar")
-    into("../demo/addons/$pluginName/bin/release")
+    into("demo/addons/$pluginName/bin/release")
 }
 
 val cleanDemoAddons by tasks.registering(Delete::class) {
-    delete("../demo/addons/$pluginName")
+    delete("demo/addons/$pluginName")
 }
 
 val copyAddonsToDemo by tasks.registering(Copy::class) {
@@ -70,7 +70,7 @@ val copyAddonsToDemo by tasks.registering(Copy::class) {
     finalizedBy(copyReleaseAARToDemoAddons)
 
     from("export_scripts_template")
-    into("../demo/addons/$pluginName")
+    into("demo/addons/$pluginName")
 }
 
 tasks.named("assemble").configure {
