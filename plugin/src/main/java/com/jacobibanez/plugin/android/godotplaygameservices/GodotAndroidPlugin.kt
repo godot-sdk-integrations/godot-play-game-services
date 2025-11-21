@@ -213,7 +213,7 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
      * @param score The raw score value. For more details, please [see this page](https://developers.google.com/games/services/common/concepts/leaderboards).
      */
     @UsedByGodot
-    fun submitScore(leaderboardId: String, score: Int) =
+    fun submitScore(leaderboardId: String, score: Long) =
         leaderboardsProxy.submitScore(leaderboardId, score)
 
     /**

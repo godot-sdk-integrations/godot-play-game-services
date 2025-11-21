@@ -92,9 +92,9 @@ class LeaderboardsProxy(
             }
     }
 
-    fun submitScore(leaderboardId: String, score: Int) {
+    fun submitScore(leaderboardId: String, score: Long) {
         Log.d(tag, "Submitting score of $score to leaderboard $leaderboardId")
-        leaderboardsClient.submitScoreImmediate(leaderboardId, score.toLong())
+        leaderboardsClient.submitScoreImmediate(leaderboardId, score)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(tag, "Score submitted successfully")
