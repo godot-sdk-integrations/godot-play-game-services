@@ -1,3 +1,13 @@
+## v3.2.0
+### Accept long numbers for submitted scores
+Collaborator @Shadowedvaca created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/88) in order to change the signature of the [`submitScore`](https://github.com/godot-sdk-integrations/godot-play-game-services/blob/main/plugin/src/main/java/com/jacobibanez/plugin/android/godotplaygameservices/GodotAndroidPlugin.kt#L216) method of the plugin. It now accepts `Long` numbers.
+### Update demo project to Godot 4.5
+Simple update so now the demo project is tested against the Godot 4.5.1.stable version.
+
+## v3.1.0
+### Bump up versions
+Collaborator @syntaxerror247 updated some dependencies versions.
+
 ## v3.0.0
 ### Remove autoloads and make them Nodes
 This is a new major version changing the way the plugin is implemented. Instead of creating several autoloads per client, now it creates one main autoload and the clients are Nodes that you can insert to your scenes. More information on how to use it in the [demo project](plugin/demo)
