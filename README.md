@@ -45,7 +45,7 @@ If you want to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) fi
 Using the plugin requires downloading the assets in the [releases section](https://github.com/Iakobs/godot-play-game-services/releases) of the repository and following the steps described there to copy the plugin folder to your Godot project. You can't download this plugin from the [Asset Library](https://godotengine.org/asset-library/asset/2440) directly because of the Android binaries needed. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
 
 ## Philosophy of the plugin
-This plugin has been revamped since version 3.0. Before, the plugin created several autoloads, one per each feature of the Play Games API (sign in, leaderboards, snapshots, etc.). Now the plugin follows the Godot philosophy of using Nodes, therefore the autoloads have been converted to Nodes, except the main `GodoPlayGamesServices` one, which now requires manual initialization. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
+This plugin has been revamped since version 3.0. Before, the plugin created several autoloads, one per each feature of the Play Games API (sign in, leaderboards, snapshots, etc.). Now the plugin follows the Godot philosophy of using Nodes, therefore the autoloads have been converted to Nodes, except the main `GodotPlayGamesServices` one, which now requires manual initialization. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
 
 ![Screenshot of Godot's Create New Node dialog showing the plugin's nodes](docs/images/plugin_nodes.png)
 
