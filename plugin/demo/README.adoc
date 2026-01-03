@@ -26,7 +26,7 @@ Finally, you can not run the game as a normal game. Instead, you have to run it 
 == First time opening the demo project
 The first time you open the demo project, you will see this error in the Godot editor:
 
-image::demo_project_error.png[alt="Screenshot of an error in the Godot editor that says:\"Failed to load script \"res://scenes/MainMenu.gd\" with error \"Parse Error\".",title=Error loading script at first run of the project.width=298,aligb=center]
+image::demo_project_error.png[alt="Screenshot of an error in the Godot editor that says:\"Failed to load script \"res://scenes/MainMenu.gd\" with error \"Parse Error\".",title=Error loading script at first run of the project.,width=298,align=center]
 
 This is completely normal, because the plugin is not yet activated. Simply go to `Project > Project Settings > Plugins` and enable the plugin, which should appear there if you have installed it in the `addons` folder.
 
