@@ -29,6 +29,7 @@ If you want to download the plugin for a previous version of Godot 4.x, use the 
   - [Google](#google)
 - [Troubleshooting](#troubleshooting)
   - [Google Credentials](#google-credentials)
+  - [Google consent screen (unmarshalling error)](#google-consent-screen)
 - [Contact me](#contact-me)
 
 ## Forewords
@@ -181,7 +182,7 @@ The one that causes more problems is the client with the Google Play Store crede
 
 Creating the OAuth2 Client in your Google Cloud and linking it to a new credential in your App in your Google Play Console, will solve the problem, and you will be able to log in from your game.
 
-### Incorrect consent screen setup
+### Google consent screen
 In some cases things might not work even after setting up the Google Credientials mentioned above.
 
 #### Identifying the problem
