@@ -238,8 +238,18 @@ Caused by: java.lang.ClassNotFoundException: com.google.android.gms.games.intern
 
 To solve this problem, you have to make sure your Play account user has access to the consent screen. If the owner of the Google Cloud project is not the user testing, this might be the reason for the above error.
 
-In the Google Cloud project, go to the `Audience` section. If the Publishing Status is `Internal`, change it to be `External`. In the popup that follows, choose `Testing`.
+In the Google Cloud project, go to the `Audience` section.
+![Screenshot of the section in the Cloud Console](docs/images/cloud_audience.png)
+
+If the Publishing Status is `Internal`, change it to be `External`.
+![Screenshot of the Publishing Status being set to Internal](docs/images/cloud_audience_user_internal.png)
+
+In the popup that follows, choose `Testing`.
+![Screenshot of the popup when selecting External](docs/images/cloud_audience_external_prompt.png)
+
 Once changed, there's now a `Test users` section farther down on the page. Add your testing accounts there.
+![Screenshot of Test users section, with 2 redacted test users added](docs/images/cloud_audience_test_users.png)
+
 With this change in place, you should be able to test signing in to the app and test any subsequent features.
 
 ## Contact me
