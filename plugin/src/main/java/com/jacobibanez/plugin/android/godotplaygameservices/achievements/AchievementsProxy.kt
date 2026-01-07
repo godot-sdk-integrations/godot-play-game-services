@@ -161,7 +161,7 @@ class AchievementsProxy(
 
     fun setAchievementSteps(achievementId: String, numSteps: Int) {
         Log.d(tag, "Setting incremental achievement with id $achievementId to $numSteps steps")
-        achievementsClient.setStepsImmediate(achievementId, amount).addOnCompleteListener { task ->
+        achievementsClient.setStepsImmediate(achievementId, numSteps).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(
                     tag,
