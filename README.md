@@ -181,6 +181,67 @@ The one that causes more problems is the client with the Google Play Store crede
 
 Creating the OAuth2 Client in your Google Cloud and linking it to a new credential in your App in your Google Play Console, will solve the problem, and you will be able to log in from your game.
 
+### Incorrect consent screen setup
+In some cases things might not work even after setting up the Google Credientials mentioned above.
+
+#### Identifying the problem
+One symptom of this is that signing in fails. The app will not show any errors, it will simply fail to sign you in on startup or when manually attemping to sign in.
+You will know that your app is failing due to invalid consent screen configuration, because you will see a message like this in the `adb` logs:
+```
+2026-01-04 03:15:04.375   894-1429  Parcel                  system_server                        E  
+Class not found when unmarshalling: com.google.android.gms.games.internal.v2.resolution.zza
+java.lang.ClassNotFoundException: com.google.android.gms.games.internal.v2.resolution.zza
+	at java.lang.Class.classForName(Native Method)
+	at java.lang.Class.forName(Class.java:454)
+	at android.os.Parcel.readParcelableCreator(Parcel.java:3031)
+	at android.os.Parcel.readParcelable(Parcel.java:2981)
+	at android.os.Parcel.readValue(Parcel.java:2883)
+	at android.os.Parcel.readArrayMapInternal(Parcel.java:3261)
+	at android.os.BaseBundle.initializeFromParcelLocked(BaseBundle.java:292)
+	at android.os.BaseBundle.unparcel(BaseBundle.java:236)
+	at android.os.BaseBundle.getString(BaseBundle.java:1160)
+	at android.content.Intent.getStringExtra(Intent.java:8552)
+	at com.android.server.wm.ActivityStarter.startActivity(ActivityStarter.java:847)
+	at com.android.server.wm.ActivityStarter.startActivity(ActivityStarter.java:732)
+	at com.android.server.wm.ActivityStarter.startActivityMayWait(ActivityStarter.java:2074)
+	at com.android.server.wm.ActivityStarter.execute(ActivityStarter.java:646)
+	at com.android.server.wm.ActivityTaskManagerService.startActivityAsUser(ActivityTaskManagerService.java:1717)
+	at com.android.server.wm.ActivityTaskManagerService.startActivityAsUser(ActivityTaskManagerService.java:1613)
+	at com.android.server.wm.ActivityTaskManagerService.startActivity(ActivityTaskManagerService.java:1566)
+	at android.app.IActivityTaskManager$Stub.onTransact(IActivityTaskManager.java:1746)
+	at android.os.Binder.execTransactInternal(Binder.java:1056)
+	at android.os.Binder.execTransact(Binder.java:1029)
+Caused by: java.lang.ClassNotFoundException: com.google.android.gms.games.internal.v2.resolution.zza
+	at java.lang.Class.classForName(Native Method) 
+	at java.lang.Class.forName(Class.java:454) 
+	at android.os.Parcel.readParcelableCreator(Parcel.java:3031) 
+	at android.os.Parcel.readParcelable(Parcel.java:2981) 
+	at android.os.Parcel.readValue(Parcel.java:2883) 
+	at android.os.Parcel.readArrayMapInternal(Parcel.java:3261) 
+	at android.os.BaseBundle.initializeFromParcelLocked(BaseBundle.java:292) 
+	at android.os.BaseBundle.unparcel(BaseBundle.java:236) 
+	at android.os.BaseBundle.getString(BaseBundle.java:1160) 
+	at android.content.Intent.getStringExtra(Intent.java:8552) 
+	at com.android.server.wm.ActivityStarter.startActivity(ActivityStarter.java:847) 
+	at com.android.server.wm.ActivityStarter.startActivity(ActivityStarter.java:732) 
+	at com.android.server.wm.ActivityStarter.startActivityMayWait(ActivityStarter.java:2074) 
+	at com.android.server.wm.ActivityStarter.execute(ActivityStarter.java:646) 
+	at com.android.server.wm.ActivityTaskManagerService.startActivityAsUser(ActivityTaskManagerService.java:1717) 
+	at com.android.server.wm.ActivityTaskManagerService.startActivityAsUser(ActivityTaskManagerService.java:1613) 
+	at com.android.server.wm.ActivityTaskManagerService.startActivity(ActivityTaskManagerService.java:1566) 
+	at android.app.IActivityTaskManager$Stub.onTransact(IActivityTaskManager.java:1746) 
+	at android.os.Binder.execTransactInternal(Binder.java:1056) 
+	at android.os.Binder.execTransact(Binder.java:1029) 
+```
+
+#### Solving the problem
+
+To solve this problem, you have to make sure your Play account user has access to the consent screen. If the owner of the Google Cloud project is not the user testing, this might be the reason for the above error.
+
+In the Google Cloud project, go to the `Audience` section. If the Publishing Status is `Internal`, change it to be `External`. In the popup that follows, choose `Testing`.
+Once changed, there's now a `Test users` section farther down on the page. Add your testing accounts there.
+With this change in place, you should be able to test signing in to the app and test any subsequent features.
+
 ## Contact me
 If you have any questions or want to propose changes, features, or found a bug, please feel free to [open an issue](https://github.com/Iakobs/godot-play-game-services/issues/new).
 
