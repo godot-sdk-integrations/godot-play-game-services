@@ -164,6 +164,19 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
         achievementsProxy.unlockAchievement(achievementId)
 
     /**
+     * Use this method to set a given achievement to have at least the given amount of steps completed. For normal achievements,
+     * use the [unlockAchievement] method instead.
+     *
+     * The method emits the [com.jacobibanez.plugin.android.godotplaygameservices.signals.AchievementsSignals.achievementUnlocked] signal.
+     *
+     * @param achievementId The achievement id.
+     * @param numSteps The number of steps to set the achievement to. Must be greater than 0.
+     */
+    @UsedByGodot
+    fun setAchievementSteps(achievementId: String, numSteps: Int) =
+        achievementsProxy.setAchievementSteps(achievementId, numSteps)
+
+    /**
      * Shows a new screen with all the leaderboards for the game.
      */
     @UsedByGodot

@@ -93,3 +93,15 @@ func show_achievements() -> void:
 func unlock_achievement(achievement_id: String) -> void:
 	if GodotPlayGameServices.android_plugin:
 		GodotPlayGameServices.android_plugin.unlockAchievement(achievement_id)
+
+## Immediately set the given achievement for the signed in player to have at least the given number of steps completed.[br]
+## Calling this method when the achievement already has more than the provided steps is a no-op.[br]
+## Once the achievement reaches the maximum number of steps, the achievement will automatically be unlocked, and any further mutation operations will be ignored.
+## [br]
+## The method emits the [signal achievement_unlocked] signal.[br]
+## [br]
+## [param achievement_id]: The achievement id.[br]
+## [param num_steps]: The number of steps to set the achievement to. Must be greater than 0.
+func set_achievement_steps(achievement_id: String, num_steps: int) -> void:
+	if GodotPlayGameServices.android_plugin:
+		GodotPlayGameServices.android_plugin.setAchievementSteps(achievement_id, num_steps)

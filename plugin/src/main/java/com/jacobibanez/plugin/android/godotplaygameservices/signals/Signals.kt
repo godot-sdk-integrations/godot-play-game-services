@@ -59,8 +59,9 @@ object SignInSignals {
  */
 object AchievementsSignals {
     /**
-     * This signal is emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.incrementAchievement]
-     * or [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.unlockAchievement] methods.
+     * This signal is emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.incrementAchievement],
+     * [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.unlockAchievement] 
+     * or [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.setAchievementSteps] methods.
      *
      * @return `true` if the achievement is unlocked. `false` otherwise. Also returns the id of the achievement.
      */

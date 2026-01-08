@@ -158,4 +158,36 @@ class AchievementsProxy(
             }
         }
     }
+
+    fun setAchievementSteps(achievementId: String, numSteps: Int) {
+        Log.d(tag, "Setting incremental achievement with id $achievementId to $numSteps steps")
+        achievementsClient.setStepsImmediate(achievementId, numSteps).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d(
+                    tag,
+                    "Achievement steps for $achievementId set successfully. Unlocked? ${task.result}"
+                )
+                emitSignal(
+                    godot,
+                    BuildConfig.GODOT_PLUGIN_NAME,
+                    achievementUnlocked,
+                    task.result,
+                    achievementId
+                )
+            } else {
+                Log.e(
+                    tag,
+                    "Achievement steps for $achievementId not set. Cause: ${task.exception}",
+                    task.exception
+                )
+                emitSignal(
+                    godot,
+                    BuildConfig.GODOT_PLUGIN_NAME,
+                    achievementUnlocked,
+                    false,
+                    achievementId
+                )
+            }
+        }
+    }
 }
