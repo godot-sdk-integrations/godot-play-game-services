@@ -49,6 +49,7 @@ If you want to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) fi
 ```
 [Project root]/addons/GodotPlayGameServices/
 ```
+On macOS, Safari may automatically extract `addons.zip` into a `GodotPlayGameServices` folder. If that happens, create an `addons` folder in your project root if it does not exist, then move the extracted `GodotPlayGameServices` folder inside it so the final path still matches the structure above.
 3. Open your project in Godot.
 4. In main menu, go to `Project > Project Settings > Plugins`, and enable **GodotPlayGameServices**.
 
