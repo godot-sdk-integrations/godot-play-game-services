@@ -27,9 +27,9 @@ var _selected_collection: PlayGamesLeaderboardVariant.Collection
 
 func _ready() -> void:
 	if play_games_leaderboard:
-		GodotPlayGameServices.image_stored.connect(func(file_path: String):
+		GodotPlayGamesServices.image_stored.connect(func(file_path: String):
 			if file_path == play_games_leaderboard.icon_image_uri:
-				GodotPlayGameServices.display_image_in_texture_rect(
+				GodotPlayGamesServices.display_image_in_texture_rect(
 					icon_rect,
 					file_path
 				)

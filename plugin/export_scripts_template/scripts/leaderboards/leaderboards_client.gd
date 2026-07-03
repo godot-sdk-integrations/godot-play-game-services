@@ -1,4 +1,4 @@
-@icon("res://addons/GodotPlayGameServices/assets/icons/leaderboards_client.svg")
+@icon("res://addons/GodotPlayGamesServices/assets/icons/leaderboards_client.svg")
 class_name PlayGamesLeaderboardsClient extends Node
 ## Client with  leaderboards functionality.
 ##
@@ -46,53 +46,53 @@ func _ready() -> void:
 	_connect_signals()
 
 func _connect_signals() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.scoreSubmitted.connect(func(is_submitted: bool, leaderboard_id: String):
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.scoreSubmitted.connect(func(is_submitted: bool, leaderboard_id: String):
 			score_submitted.emit(is_submitted, leaderboard_id)
 		)
-		GodotPlayGameServices.android_plugin.scoreLoaded.connect(func(leaderboard_id: String, json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.scoreLoaded.connect(func(leaderboard_id: String, json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			score_loaded.emit(leaderboard_id, PlayGamesLeaderboardScore.new(safe_dictionary))
 		)
-		GodotPlayGameServices.android_plugin.allLeaderboardsLoaded.connect(func(leaderboards_json: String):
-			var safe_array := GodotPlayGameServices.json_marshaller.safe_parse_array(leaderboards_json)
+		GodotPlayGamesServices.android_plugin.allLeaderboardsLoaded.connect(func(leaderboards_json: String):
+			var safe_array := GodotPlayGamesServices.json_marshaller.safe_parse_array(leaderboards_json)
 			var leaderboards: Array[PlayGamesLeaderboard] = []
 			for dictionary: Dictionary in safe_array:
 				leaderboards.append(PlayGamesLeaderboard.new(dictionary))
 			all_leaderboards_loaded.emit(leaderboards)
 		)
-		GodotPlayGameServices.android_plugin.leaderboardLoaded.connect(func(json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.leaderboardLoaded.connect(func(json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			leaderboard_loaded.emit(PlayGamesLeaderboard.new(safe_dictionary))
 		)
-		GodotPlayGameServices.android_plugin.playerCenteredScoresLoaded.connect(func(leaderboard_id: String, json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.playerCenteredScoresLoaded.connect(func(leaderboard_id: String, json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			player_centered_scores_loaded.emit(leaderboard_id, PlayGamesLeaderboardScores.new(safe_dictionary))
 		)
-		GodotPlayGameServices.android_plugin.topScoresLoaded.connect(func(leaderboard_id: String, json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.topScoresLoaded.connect(func(leaderboard_id: String, json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			top_scores_loaded.emit(leaderboard_id, PlayGamesLeaderboardScores.new(safe_dictionary))
 		)
 
 ## Use this method to show all leaderbords for this game in a new screen.
 func show_all_leaderboards() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showAllLeaderboards()
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showAllLeaderboards()
 
 ## Use this method to show a specific leaderboard in a new screen.[br]
 ## [br]
 ## [param leaderboard_id]: The leaderboard id.
 func show_leaderboard(leaderboard_id: String) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showLeaderboard(leaderboard_id)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showLeaderboard(leaderboard_id)
 
 ## Use this method to show a specific leaderboard for a given time span in a new screen.[br]
 ## [br]
 ## [param leaderboard_id]: The leaderboard id.[br]
 ## [param time_span]: The time span for the leaderboard. See the [enum TimeSpan] enum.
 func show_leaderboard_for_time_span(leaderboard_id: String, time_span: PlayGamesLeaderboardVariant.TimeSpan) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showLeaderboardForTimeSpan(leaderboard_id, time_span)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showLeaderboardForTimeSpan(leaderboard_id, time_span)
 
 ## Use this method to show a specific leaderboard for a given time span and 
 ## collection type in a new screen.[br]
@@ -105,8 +105,8 @@ func show_leaderboard_for_time_span_and_collection(
 	time_span: PlayGamesLeaderboardVariant.TimeSpan,
 	collection: PlayGamesLeaderboardVariant.Collection
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showLeaderboardForTimeSpanAndCollection(leaderboard_id, time_span, collection)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showLeaderboardForTimeSpanAndCollection(leaderboard_id, time_span, collection)
 
 ## Submits the score to the leaderboard for the currently signed in player. The score 
 ## is ignored if it is worse (as defined by the leaderboard configuration) than a previously
@@ -117,8 +117,8 @@ func show_leaderboard_for_time_span_and_collection(
 ## [param leaderboard_id]: The leaderboard id.[br]
 ## [param score]: The raw score value.
 func submit_score(leaderboard_id: String, score: int) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.submitScore(leaderboard_id, score)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.submitScore(leaderboard_id, score)
 
 ## Use this method and subscribe to the emitted signal to receive the score of the
 ## currently signed in player for the specified leaderboard, time span, and collection.[br]
@@ -133,8 +133,8 @@ func load_player_score(
 	time_span: PlayGamesLeaderboardVariant.TimeSpan,
 	collection: PlayGamesLeaderboardVariant.Collection
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadPlayerScore(leaderboard_id, time_span, collection)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadPlayerScore(leaderboard_id, time_span, collection)
 
 ## Use this method and subscribe to the emitted signal to receive the list of the game
 ## leaderboards.[br]
@@ -146,8 +146,8 @@ func load_player_score(
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.
 func load_all_leaderboards(force_reload: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadAllLeaderboards(force_reload)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadAllLeaderboards(force_reload)
 
 ## Use this method and subscribe to the emitted signal to receive a leaderboard.[br]
 ## [br]
@@ -159,8 +159,8 @@ func load_all_leaderboards(force_reload: bool) -> void:
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.
 func load_leaderboard(leaderboard_id: String, force_reload: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadLeaderboard(leaderboard_id, force_reload)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadLeaderboard(leaderboard_id, force_reload)
 
 ## Use this method and subscribe to the emitted signal to receive an object containing
 ## the selected leaderboard and an array of scores for that leaderboard, centered in the
@@ -183,8 +183,8 @@ func load_player_centered_scores(
 	max_results: int,
 	force_reload: bool
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadPlayerCenteredScores(
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadPlayerCenteredScores(
 			leaderboard_id,
 			time_span,
 			collection,
@@ -212,8 +212,8 @@ func load_top_scores(
 	max_results: int,
 	force_reload: bool
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadTopScores(
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadTopScores(
 			leaderboard_id,
 			time_span,
 			collection,

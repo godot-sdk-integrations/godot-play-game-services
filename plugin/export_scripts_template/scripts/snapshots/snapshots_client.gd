@@ -1,4 +1,4 @@
-@icon("res://addons/GodotPlayGameServices/assets/icons/snapshots_client.svg")
+@icon("res://addons/GodotPlayGamesServices/assets/icons/snapshots_client.svg")
 class_name PlayGamesSnapshotsClient extends Node
 ## Client with save and load games functionality.
 ##
@@ -29,24 +29,24 @@ signal conflict_emitted(conflict: PlayGamesSnapshotConflict)
 signal snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata])
 
 func _ready() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.gameSaved.connect(
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.gameSaved.connect(
 			func(is_saved: bool, save_data_name: String, save_data_description: String):
 				game_saved.emit(is_saved, save_data_name, save_data_description)
 		)
-		GodotPlayGameServices.android_plugin.gameLoaded.connect(func(json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.gameLoaded.connect(func(json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			if safe_dictionary.is_empty():
 				game_loaded.emit(null)
 			else:
 				game_loaded.emit(PlayGamesSnapshot.new(safe_dictionary))
 		)
-		GodotPlayGameServices.android_plugin.conflictEmitted.connect(func(json_data: String):
-			var safe_dictionary := GodotPlayGameServices.json_marshaller.safe_parse_dictionary(json_data)
+		GodotPlayGamesServices.android_plugin.conflictEmitted.connect(func(json_data: String):
+			var safe_dictionary := GodotPlayGamesServices.json_marshaller.safe_parse_dictionary(json_data)
 			conflict_emitted.emit(PlayGamesSnapshotConflict.new(safe_dictionary))
 		)
-		GodotPlayGameServices.android_plugin.snapshotsLoaded.connect(func(json_data: String):
-			var safe_array := GodotPlayGameServices.json_marshaller.safe_parse_array(json_data)
+		GodotPlayGamesServices.android_plugin.snapshotsLoaded.connect(func(json_data: String):
+			var safe_array := GodotPlayGamesServices.json_marshaller.safe_parse_array(json_data)
 			var snapshots: Array[PlayGamesSnapshotMetadata] = []
 			for dictionary: Dictionary in safe_array:
 				snapshots.append(PlayGamesSnapshotMetadata.new(dictionary))
@@ -66,8 +66,8 @@ func show_saved_games(
 	allow_delete: bool,
 	max_snapshots: int
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showSavedGames(title, allow_add_button, allow_delete, max_snapshots)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showSavedGames(title, allow_add_button, allow_delete, max_snapshots)
 
 ## Saves game data to the Google Cloud.[br]
 ## [br]
@@ -84,8 +84,8 @@ func save_game(
 	played_time_millis: int = 0,
 	progress_value: int = 0,
 ) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.saveGame(file_name, description, save_data, played_time_millis, progress_value)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.saveGame(file_name, description, save_data, played_time_millis, progress_value)
 
 ## Loads game data from the Google Cloud.[br]
 ## [br]
@@ -94,8 +94,8 @@ func save_game(
 ## [param fileName]: The name of the save file. Must be between 1 and 100 non-URL-reserved charactes (a-z, A-Z, 0-9, or the symbols "-", ".", "_", or "~").[br]
 ## [param create_if_not_found]: False by default. If true, the snapshot will be created if one cannot be found.
 func load_game(file_name: String, create_if_not_found := false) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadGame(file_name, create_if_not_found)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadGame(file_name, create_if_not_found)
 
 ## Loads the list of [SnapshotMetadata] of the current signed in player.[br]
 ## [br]
@@ -106,12 +106,12 @@ func load_game(file_name: String, create_if_not_found := false) -> void:
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.
 func load_snapshots(force_reload: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadSnapshots(force_reload)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadSnapshots(force_reload)
 
 ## Deletes a snapshot. This will delete the data of the snapshot locally and on the server.[br]
 ## [br]
 ## [param snapshot_id]: The snapshot identifier.
 func delete_snapshot(snapshot_id: String) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.deleteSnapshot(snapshot_id)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.deleteSnapshot(snapshot_id)

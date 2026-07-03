@@ -22,7 +22,7 @@ func _ready() -> void:
 		)
 
 func _set_up_display() -> void:
-	GodotPlayGameServices.image_stored.connect(func(file_path: String):
+	GodotPlayGamesServices.image_stored.connect(func(file_path: String):
 		if file_path == play_games_player.hi_res_image_uri and not avatar_rect.texture:
 			_display_avatar()
 	)
@@ -50,7 +50,7 @@ func _load_and_retry(image_uri: String) -> Image:
 	return image
 
 func _display_avatar() -> void:
-	GodotPlayGameServices.display_image_in_texture_rect(
+	GodotPlayGamesServices.display_image_in_texture_rect(
 		avatar_rect,
 		play_games_player.hi_res_image_uri
 	)

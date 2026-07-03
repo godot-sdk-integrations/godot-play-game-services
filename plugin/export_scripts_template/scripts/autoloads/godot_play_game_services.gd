@@ -34,11 +34,11 @@ var json_marshaller := JsonMarshaller.new()
 ## Returns [PlayGamesPluginError.OK] if the plugin was initialized properly, or
 ## [PlayGamesPluginError.PLUGIN_NOT_FOUND] otherwise.
 func initialize() -> PlayGamesPluginError:
-	var plugin_name := "GodotPlayGameServices"
+	var plugin_name := "GodotPlayGamesServices"
 	
 	if not android_plugin:
 		if Engine.has_singleton(plugin_name):
-			print("GodotPlayGameServices plugin initialized successfully.")
+			print("GodotPlayGamesServices plugin initialized successfully.")
 			
 			android_plugin = Engine.get_singleton(plugin_name)
 			android_plugin.initialize()
@@ -48,7 +48,7 @@ func initialize() -> PlayGamesPluginError:
 			)
 			return PlayGamesPluginError.OK
 		else:
-			printerr("GodotPlayGameServices not found. Google Play Games Services will not work.")
+			printerr("GodotPlayGamesServices not found. Google Play Games Services will not work.")
 	
 	return PlayGamesPluginError.PLUGIN_NOT_FOUND
 

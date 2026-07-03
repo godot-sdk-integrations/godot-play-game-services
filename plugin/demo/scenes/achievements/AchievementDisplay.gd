@@ -99,7 +99,7 @@ func _connect_signals() -> void:
 					_waiting = false
 					_set_up_display()
 	)
-	GodotPlayGameServices.image_stored.connect(func(file_path: String):
+	GodotPlayGamesServices.image_stored.connect(func(file_path: String):
 		if file_path == play_games_achievement.revealed_image_uri\
 		or file_path == play_games_achievement.unlocked_image_uri:
 			_set_up_icon()
@@ -119,7 +119,7 @@ func _set_up_icon() -> void:
 			property = play_games_achievement.unlocked_image_uri
 	
 	if property and not property.is_empty():
-		GodotPlayGameServices.display_image_in_texture_rect(
+		GodotPlayGamesServices.display_image_in_texture_rect(
 			icon_rect,
 			property
 		)

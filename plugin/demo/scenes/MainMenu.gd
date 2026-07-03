@@ -9,10 +9,10 @@ extends Control
 @onready var play_games_sign_in_client: PlayGamesSignInClient = %PlayGamesSignInClient
 
 func _enter_tree() -> void:
-	GodotPlayGameServices.initialize()
+	GodotPlayGamesServices.initialize()
 
 func _ready() -> void:
-	if not GodotPlayGameServices.android_plugin:
+	if not GodotPlayGamesServices.android_plugin:
 		title_label.text = "Plugin Not Found!"
 	else:
 		title_label.text = "Main Menu"
