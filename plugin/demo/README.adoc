@@ -7,7 +7,7 @@ Doc Writer <jacobibanez@jacobibanez.com>
 
 This folder is a Godot project that you can directly open in Godot to see an implementation of the plugin in a real Godot game.
 
-IMPORTANT: To use this project, you have to uncompress the contents of the `addons.zip` file in the link:https://github.com/Iakobs/godot-play-game-services/releases[releases section] of the repository to the root folder of the project. Alternatively, you can run the `./gradlew assemble` command from the root of the repository. This command will install the plugin in the `addons` directory of the godot project.
+IMPORTANT: To use this project, you have to uncompress the contents of the `addons.zip` file in the link:https://github.com/godot-sdk-integrations/godot-play-game-services/releases[releases section] of the repository to the root folder of the project. The final path should be `plugin/demo/addons/GodotPlayGameServices`. If macOS automatically extracts the zip into a `GodotPlayGameServices` folder, move that folder into `plugin/demo/addons/` instead of leaving it beside the `addons` folder. Alternatively, you can run the `./gradlew assemble` command from the root of the repository. This command will install the plugin in the `addons` directory of the godot project.
 
 == Directory Structure
 The demo project contains a `scenes` folder with all the `.tscn` and `.gd` files that you will need, everything is inside this folder.
