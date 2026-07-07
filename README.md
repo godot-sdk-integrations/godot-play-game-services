@@ -91,9 +91,11 @@ Once that's done, you will need to create some achievements and leaderboards in 
 
 ![Screenshot of the Game ID inside the Google Dev Console](docs/images/game_id.png)
 
-In order to make the configuration easier, the plugin adds a new dock to the bottom panel of your Godot editor, where you can add the Game ID. Once you click on the submit button, the configuration will be saved and loaded every time you reopen the editor.
+### Add Game ID to your app.
+Open the Android export preset _(Project > Export… > Android)_, scroll down to the plugin settings section for **GodotPlayGameServices**, and enter your game ID in the `godot_play_game_services/game_id` field.
+This ID will be automatically applied during the build export process.
 
-![Screenshot of the new dock in the bottom panel of the Godot Editor](docs/images/plugin_dock.png)
+![Screenshot of the plugin export settings section](docs/images/settings_game_id.png)
 
 > :warning: Beware of not changing the Game Id and submitting by mistake, since that will break the integration with Google Game Services.
 
@@ -144,7 +146,7 @@ You will know that your app is failing due to authentication problems, because y
 **** (1) Your package name and certificate fingerprint do not match
 ****     the client ID you registered in Developer Console.
 **** (2) Your App ID was incorrectly entered.
-**** (3) Your game settings have not been published and you are 
+**** (3) Your game settings have not been published and you are
 ****     trying to log in with an account that is not listed as
 ****     a test account.
 **** (4) A server auth code was requested, but an incorrect client
@@ -156,7 +158,7 @@ You will know that your app is failing due to authentication problems, because y
 **** Cert SHA1 fingerprint: AA:AA:11:AA:A1:11:11:11:11:A!:1A:AA:A1:11:1A:A1:1A:A1:11:1A
 **** App ID from manifest : 111111111111
 ****
-**** Check that the above information matches your setup in 
+**** Check that the above information matches your setup in
 **** Developer Console. Also, check that you're logging in with the
 **** right account (it should be listed in the Testers section if
 **** your project is not yet published).
@@ -196,7 +198,7 @@ In some cases things might not work even after setting up the Google Crediential
 One symptom of this is that signing in fails. The app will not show any errors, it will simply fail to sign you in on startup or when manually attemping to sign in.
 You will know that your app is failing due to invalid consent screen configuration, because you will see a message like this in the `adb` logs:
 ```
-2026-01-04 03:15:04.375   894-1429  Parcel                  system_server                        E  
+2026-01-04 03:15:04.375   894-1429  Parcel                  system_server                        E
 Class not found when unmarshalling: com.google.android.gms.games.internal.v2.resolution.zza
 java.lang.ClassNotFoundException: com.google.android.gms.games.internal.v2.resolution.zza
 	at java.lang.Class.classForName(Native Method)
