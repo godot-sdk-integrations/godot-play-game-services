@@ -2,7 +2,11 @@
 ### Create `addons` folder in the root of the project
 To follow the usual structure of Godot plugins, I moved the generated sources of the plugin to the `addons` folder. I also added the [.gitattributes](.gitattributes) file so the only available folder to download from the Godot Editor is the folder with the plugin.
 ### Add note in the docs about MacOS zip extraction
-Collaborator @vku2018 created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/114) to fix @gkwaerp [issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/95).
+Collaborator @vku2018 created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/114) to fix @gkwaerp [issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/95), where the docs weren't clear about where to place the plugin folder in the Godot project.
+### Add game-id into game export settings
+Collaborator @o-tokar created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/116) to implement @ryan-linehan [feature request](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/91), so the Game ID will be moved from a dock in the engine to a setting in the android export configuration.
+### Add pro-guard rules
+Collaborator @o-tokar created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/117) to implement his own [feature request](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/111), so now users of the plugin can enable the `minifyEnabled` and `shrinkResources` in their `android/build.gradle` files for their Godot project.
 
 ## v3.2.0
 ### Accept long numbers for submitted scores
