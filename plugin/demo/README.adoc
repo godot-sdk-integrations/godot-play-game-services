@@ -19,7 +19,7 @@ IMPORTANT: Make sure that you are using version 4.2+ of Godot. This plugin is on
 
 This is an android project with a custom build, so in order to run your game from the Godot editor, you have to install the build template first. Please, refer to the https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html[Godot docs] for further information.
 
-You also have to create an `Export Configuration` for Android. Refer to the https://github.com/Iakobs/godot-play-game-services#export-configuration[README] of the repository.
+You also have to create an `Export Configuration` for Android. Refer to the https://github.com/godot-sdk-integrations/godot-play-game-services#export-configuration[README] of the repository.
 
 Finally, you can not run the game as a normal game. Instead, you have to run it in an android device (real or emulated) via the `Remote Debug` button in the top right corner of the Godot editor.
 

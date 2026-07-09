@@ -1,3 +1,9 @@
+## v3.3.0
+### Create `addons` folder in the root of the project
+To follow the usual structure of Godot plugins, I moved the generated sources of the plugin to the `addons` folder. I also added the [.gitattributes](.gitattributes) file so the only available folder to download from the Godot Editor is the folder with the plugin.
+### Add note in the docs about MacOS zip extraction
+Collaborator @vku2018 created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/114) to fix @gkwaerp [issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/95).
+
 ## v3.2.0
 ### Accept long numbers for submitted scores
 Collaborator @Shadowedvaca created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/88) in order to change the signature of the [`submitScore`](https://github.com/godot-sdk-integrations/godot-play-game-services/blob/main/plugin/src/main/java/com/jacobibanez/plugin/android/godotplaygameservices/GodotAndroidPlugin.kt#L216) method of the plugin. It now accepts `Long` numbers.
@@ -35,11 +41,11 @@ The GDScript classes and enums renamed are:
 
 ## v1.8.3
 ### Return null when Snapshot is not found
-Ass suggested by @TheSkyOne in [this issue](https://github.com/Iakobs/godot-play-game-services/issues/38), when calling to `SnapshotClient.load_game()` and the snapshot is not found, the `game_loaded` signal will now return a null, instead of not being emitted at all as before.
+Ass suggested by @TheSkyOne in [this issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/38), when calling to `SnapshotClient.load_game()` and the snapshot is not found, the `game_loaded` signal will now return a null, instead of not being emitted at all as before.
 
 ## v1.8.2
 ### Add origin field to SnapshotConflict object
-As suggested by @RProduction in [this issue](https://github.com/Iakobs/godot-play-game-services/issues/35), I added an `origin` field to the `SnapshotConflict` object coming in the `SnapshotClient.conflict_emitted` signal. This field value is either `SAVE` or `LOAD`, indicating what method originally triggered the Snapshot conflict.
+As suggested by @RProduction in [this issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/35), I added an `origin` field to the `SnapshotConflict` object coming in the `SnapshotClient.conflict_emitted` signal. This field value is either `SAVE` or `LOAD`, indicating what method originally triggered the Snapshot conflict.
 
 ## v1.8.1
 ### Update version in `plugin.cfg` file
@@ -47,14 +53,14 @@ The plugin version was not updated in `v1.8.0`, causing confusion to users of th
 
 ## v1.8.0
 ### Update plugin for Godot 4.3
-Thanks to [TheSkyOne](https://github.com/TheSkyOne) for bringing to my attention that [the plugin wasn't working for Godot 4.3](https://github.com/Iakobs/godot-play-game-services/issues/32). I've update it to use version 4.3 of the Godot Library Dependency.
+Thanks to [TheSkyOne](https://github.com/TheSkyOne) for bringing to my attention that [the plugin wasn't working for Godot 4.3](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/32). I've update it to use version 4.3 of the Godot Library Dependency.
 
 ### Update Google Play Games Library version
 Google's `play-services-games-v2` dependency was updated from version `19.0.0` to version `20.1.2`.
 
 ## v1.7.0
 ### Send JSON strings instead of Dictionaries
-The `gameLoaded` and `conflictEmitted` signals where sending an instance of the Dictionary class. Instead, they send a JSON string now, as suggested by @nepalisameer in [this issue](https://github.com/Iakobs/godot-play-game-services/issues/22).
+The `gameLoaded` and `conflictEmitted` signals where sending an instance of the Dictionary class. Instead, they send a JSON string now, as suggested by @nepalisameer in [this issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/22).
 
 ## v1.6.0
 ### Load Snapshots
@@ -77,7 +83,7 @@ Added three new methods for events API:
 
 ## v1.5.0
 ### Order of autoloads
-The autoloads where causing errors on first launch of the project, due to the load order and dependencies between them. The load order has now been fixed to avoid this errors. Also, the plugin is now disabled by default in the demo project. Look at the [demo project documentation](https://github.com/Iakobs/godot-play-game-services/tree/main/plugin/demo) for further info.
+The autoloads where causing errors on first launch of the project, due to the load order and dependencies between them. The load order has now been fixed to avoid this errors. Also, the plugin is now disabled by default in the demo project. Look at the [demo project documentation](https://github.com/godot-sdk-integrations/godot-play-game-services/tree/main/plugin/demo) for further info.
 
 ### Load player centered scores
 The [loadPlayerCenteredScores](https://developers.google.com/android/reference/com/google/android/gms/games/LeaderboardsClient#loadPlayerCenteredScores(java.lang.String,%20int,%20int,%20int,%20boolean)) method from Google's API has been added to the plugin. This method returns a list of scores, centered in the signed in player, for a given leaderboard. There's no example in the demo app yet, but it's usage is documented in the code itself.
@@ -91,17 +97,17 @@ In the new dock that the plugin adds to the bottom bar, the max length of the Ga
 
 Also, the input of the user is now converted to a number, stripping any letters or symbols from it.
 
-Thanks to @godfryd for pointing this issue out in [this issue](https://github.com/Iakobs/godot-play-game-services/issues/13).
+Thanks to @godfryd for pointing this issue out in [this issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/13).
 
 ## v1.3.0
 ### Add method to request a server side access token
 Added the `requestServerSideAccess` method to the plugin to request a server side access token, in case the users of the plugin want to develop a backend to communicate with the [web REST API](https://developers.google.com/games/services/web/api/rest) that Google provides.
 
-Thanks to @AndrewSumsion for the [suggestion](https://github.com/Iakobs/godot-play-game-services/issues/10).
+Thanks to @AndrewSumsion for the [suggestion](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/10).
 
 ## v1.2.1
 ### Rename the `Game` class in `snapshots_client.gd` to `GameInfo`
-The `Game` inner class in the `SnapshotsClient` autoload was renamed to `GameInfo` to avoid possible common clashes with games who might already use that name in their own namespace, as suggested by @g-libardi in [this issue](https://github.com/Iakobs/godot-play-game-services/issues/9).
+The `Game` inner class in the `SnapshotsClient` autoload was renamed to `GameInfo` to avoid possible common clashes with games who might already use that name in their own namespace, as suggested by @g-libardi in [this issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/9).
 
 ## v1.2.0
 ### Deprecated signal
@@ -111,7 +117,7 @@ The `userSignedIn` signal is deprecated in favor of the already existing `userAu
 Added some fake logging to the main menu. The Title of the screen shows different messages to show some common problems, like plugin not loaded or user not signed in.
 
 ### Bug fixing
-The `leaderboards_client.gd` script had a wrong call to the android plugin in the `show_leaderboard` function. Thanks to [mrbut1995](https://github.com/Iakobs/godot-play-game-services/issues/5) for finding it and notifying!
+The `leaderboards_client.gd` script had a wrong call to the android plugin in the `show_leaderboard` function. Thanks to [mrbut1995](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/5) for finding it and notifying!
 
 ## v1.1.0
 ### Saved Games

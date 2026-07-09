@@ -1,15 +1,15 @@
 # Godot Play Game Services
 Godot 4.3+ plugin for integration of the latest version of [Google Play Game Services SDK](https://developers.google.com/games/services/android/quickstart).
 
-If you want to download the plugin for a previous version of Godot 4.x, use the branch selector in the repository. For Godot 3.x versions, [look here](https://github.com/Iakobs/godot-google-play-game-services-android-plugin)!
+If you want to download the plugin for a previous version of Godot 4.x, use the branch selector in the repository. For Godot 3.x versions, [look here](https://github.com/godot-sdk-integrations/godot-google-play-game-services-android-plugin)!
 
 ---
 
 ![Plugin Header](github-social-preview.png)
 
-[![Android version and API level 34](https://img.shields.io/badge/Android-API%20Level%2034-darkgreen.svg)](https://developer.android.com)
-[![Godot version 4.3](https://img.shields.io/badge/Godot%20Engine-4.3-blue.svg)](https://github.com/godotengine/godot/)
-[![Google Play Game Services version 20.1.2](https://img.shields.io/badge/Play%20Services%20Games%20v2-20.1.2-green.svg)](https://developers.google.com/games/services/android/quickstart)
+[![Android version and API level 35](https://img.shields.io/badge/Android-API%20Level%2035-darkgreen.svg)](https://developer.android.com)
+[![Godot version 4.5](https://img.shields.io/badge/Godot%20Engine-4.5-blue.svg)](https://github.com/godotengine/godot/)
+[![Google Play Game Services version 21.0.0](https://img.shields.io/badge/Play%20Services%20Games%20v2-21.0.0-green.svg)](https://developers.google.com/games/services/android/quickstart)
 
 ---
 
@@ -33,7 +33,7 @@ If you want to download the plugin for a previous version of Godot 4.x, use the 
 - [Contact me](#contact-me)
 
 ## Forewords
-The whole project started as a collaboration with [Rafa Laguna](https://github.com/rafalagoon), and this plugin is the updated version of the [old one](https://github.com/Iakobs/godot-google-play-game-services-android-plugin/tree/main) for Godot 3.5+.
+The whole project started as a collaboration with [Rafa Laguna](https://github.com/rafalagoon), and this plugin is the updated version of the [old one](https://github.com/godot-sdk-integrations/godot-google-play-game-services-android-plugin/tree/main) for Godot 3.5+.
 
 With Godot 4.2+, the way android plugins work [has changed](https://docs.godotengine.org/en/stable/tutorials/platform/android/android_plugin.html), so I had to update this plugin to match the new requirements. Now there's only one editor plugin (this one), instead of having two separate plugins like before, one android plugin and one godot plugin.
 
@@ -44,12 +44,12 @@ If you want to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) fi
 
 ## Install the plugin
 
-1. Download the latest release from the [Godot Asset Store](https://store-beta.godotengine.org/asset/jacob-ibanez-sanchez/google-play-games-services-for-godot/) or the [GitHub releases](https://github.com/godot-sdk-integrations/godot-play-game-services/releases).
+1. Download the latest release from the [Godot Asset Store](https://store.godotengine.org/asset/jacob-ibanez-sanchez/google-play-games-services-for-godot/) or the [GitHub releases](https://github.com/godot-sdk-integrations/godot-play-game-services/releases).
 2. Extract and copy the plugin to your project's `addons` folder. The final structure should look like:
 ```
 [Project root]/addons/GodotPlayGameServices/
 ```
-On macOS, Safari may automatically extract `addons.zip` into a `GodotPlayGameServices` folder. If that happens, create an `addons` folder in your project root if it does not exist, then move the extracted `GodotPlayGameServices` folder inside it so the final path still matches the structure above.
+> :warning: On macOS, Safari may automatically extract `addons.zip` into a `GodotPlayGameServices` folder. If that happens, create an `addons` folder in your project root if it does not exist, then move the extracted `GodotPlayGameServices` folder inside it so the final path still matches the structure above.
 3. Open your project in Godot.
 4. In main menu, go to `Project > Project Settings > Plugins`, and enable **GodotPlayGameServices**.
 
@@ -74,7 +74,7 @@ After making your changes, or if you just want to manually build the plugin, fol
 ```
 ./gradlew assemble
 ```
-The output files can be found in [`plugin/demo/addons`](plugin/demo/addons). The plugin itself, that you can copy to your project to use, is in the [`plugin/demo/addons/GodotPlayGameServices`](plugin/demo/addons/GodotPlayGameServices), just copy the whole `GodotPlayGameServices` folder into the `addons` folder of your Godot project and activate the plugin in `Project` -> `Project Settings...` -> `Plugins`
+The output files can be found in the [`addons`](addons) folder. The plugin itself, that you can copy to your project to use, is in the [`plugin/demo/addons/GodotPlayGameServices`](plugin/demo/addons/GodotPlayGameServices) folder, just copy the whole `GodotPlayGameServices` folder into the `addons` folder of your Godot project and activate the plugin in `Project` -> `Project Settings...` -> `Plugins`
 
 ### Testing the plugin
 You can also use the included [Godot demo project](plugin/demo) to test the built Android plugin.
@@ -262,7 +262,7 @@ Once changed, there's now a `Test users` section farther down on the page. Add y
 With this change in place, you should be able to test signing in to the app and test any subsequent features.
 
 ## Contact me
-If you have any questions or want to propose changes, features, or found a bug, please feel free to [open an issue](https://github.com/Iakobs/godot-play-game-services/issues/new).
+If you have any questions or want to propose changes, features, or found a bug, please feel free to [open an issue](https://github.com/godot-sdk-integrations/godot-play-game-services/issues/new).
 
 I try to answer in the same day and provide all the help I can, even if it's out of scope of the plugin, like guiding over some Google configurations, etc.
 
