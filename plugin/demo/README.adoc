@@ -33,7 +33,7 @@ This is completely normal, because the plugin is not yet activated. Simply go to
 After enabling the plugin, confirm that the `GodotPlayGamesServices` autoload appears in the `Autoload` tab. Then simply reload your project from `Project > Reload Current Project`, and you are good to go!
 
 == Initializing the plugin
-You have to manually initialize the plugin calling the `GodotPlayGameServices.initialize()` method of the plugin autoload. The Main Menu of the demo game calls it in the `_enter_tree` virtual method.
+You have to manually initialize the plugin calling the `GodotPlayGamesServices.initialize()` method of the plugin autoload. The Main Menu of the demo game calls it in the `_enter_tree` virtual method.
 
 It uses this method instead of the `_ready` method because this scene also uses the Sign In client, and the plugin needs to be initialized before the clients are loaded into the Scene Tree.
 

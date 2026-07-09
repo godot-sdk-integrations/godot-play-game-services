@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
+GodotPlayGamesServices="*res://addons/GodotPlayGamesServices/scripts/autoloads/godot_play_game_services.gd"
 
 [display]
 
@@ -35,7 +35,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotPlayGameServices/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotPlayGamesServices/plugin.cfg")
 
 [file_customization]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx8537vuljblk"]
 
-[ext_resource type="Script" path="res://addons/GodotPlayGameServices/dock.gd" id="1_k0q71"]
+[ext_resource type="Script" path="res://addons/GodotPlayGamesServices/dock.gd" id="1_k0q71"]
 
 [node name="Godot Play Game Services" type="PanelContainer"]
 anchors_preset = 15

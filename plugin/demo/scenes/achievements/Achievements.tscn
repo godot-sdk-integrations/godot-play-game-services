@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bmm3mvq11y045" path="res://theme.tres" id="1_a4mr7"]
 [ext_resource type="Script" path="res://scenes/achievements/Achievements.gd" id="1_h3sdc"]
-[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="3_cmfbe"]
+[ext_resource type="Script" path="res://addons/GodotPlayGamesServices/scripts/achievements/achievements_client.gd" id="3_cmfbe"]
 
 [node name="Achievements" type="Control"]
 layout_mode = 3

@@ -1,4 +1,4 @@
-@icon("res://addons/GodotPlayGameServices/assets/icons/achievements_client.svg")
+@icon("res://addons/GodotPlayGamesServices/assets/icons/achievements_client.svg")
 class_name PlayGamesAchievementsClient extends Node
 ## Client with achievements functionality.
 ##
@@ -28,19 +28,19 @@ func _ready() -> void:
 	_connect_signals()
 
 func _connect_signals() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.achievementUnlocked.connect(func(is_unlocked: bool, achievement_id: String):
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.achievementUnlocked.connect(func(is_unlocked: bool, achievement_id: String):
 			achievement_unlocked.emit(is_unlocked, achievement_id)
 		)
-		GodotPlayGameServices.android_plugin.achievementsLoaded.connect(func(achievements_json: String):
-			var safe_array := GodotPlayGameServices.json_marshaller.safe_parse_array(achievements_json)
+		GodotPlayGamesServices.android_plugin.achievementsLoaded.connect(func(achievements_json: String):
+			var safe_array := GodotPlayGamesServices.json_marshaller.safe_parse_array(achievements_json)
 			var achievements: Array[PlayGamesAchievement] = []
 			for dictionary: Dictionary in safe_array:
 				achievements.append(PlayGamesAchievement.new(dictionary))
 			
 			achievements_loaded.emit(achievements)
 		)
-		GodotPlayGameServices.android_plugin.achievementRevealed.connect(func(is_revealed: bool, achievement_id: String):
+		GodotPlayGamesServices.android_plugin.achievementRevealed.connect(func(is_revealed: bool, achievement_id: String):
 			achievement_revealed.emit(is_revealed, achievement_id)
 		)
 
@@ -52,8 +52,8 @@ func _connect_signals() -> void:
 ## [param achievement_id]: The achievement id.[br]
 ## [param amount]: The number of steps to increment by. Must be greater than 0.
 func increment_achievement(achievement_id: String, amount: int) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.incrementAchievement(achievement_id, amount)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.incrementAchievement(achievement_id, amount)
 
 ## Use this method and subscribe to the emitted signal to receive the list of the game
 ## achievements.[br]
@@ -65,8 +65,8 @@ func increment_achievement(achievement_id: String, amount: int) -> void:
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.
 func load_achievements(force_reload: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadAchievements(force_reload)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadAchievements(force_reload)
 
 ## Use this method to reveal a hidden achievement to the current signed in player. 
 ## If the achievement is already unlocked, this method will have no effect.[br]
@@ -75,14 +75,14 @@ func load_achievements(force_reload: bool) -> void:
 ## [br]
 ## [param achievement_id]: The achievement id.
 func reveal_achievement(achievement_id: String) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.revealAchievement(achievement_id)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.revealAchievement(achievement_id)
 
 ## Use this method to open a new window with the achievements of the game, and 
 ## the progress of the player made so far to unlock those achievements.
 func show_achievements() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.showAchievements()
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.showAchievements()
 
 ## Immediately unlocks the given achievement for the signed in player. If the 
 ## achievement is secret, it will be revealed to the player.[br]
@@ -91,8 +91,8 @@ func show_achievements() -> void:
 ## [br]
 ## [param achievement_id]: The achievement id.
 func unlock_achievement(achievement_id: String) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.unlockAchievement(achievement_id)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.unlockAchievement(achievement_id)
 
 ## Immediately set the given achievement for the signed in player to have at least the given number of steps completed.[br]
 ## Calling this method when the achievement already has more than the provided steps is a no-op.[br]
@@ -103,5 +103,5 @@ func unlock_achievement(achievement_id: String) -> void:
 ## [param achievement_id]: The achievement id.[br]
 ## [param num_steps]: The number of steps to set the achievement to. Must be greater than 0.
 func set_achievement_steps(achievement_id: String, num_steps: int) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.setAchievementSteps(achievement_id, num_steps)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.setAchievementSteps(achievement_id, num_steps)

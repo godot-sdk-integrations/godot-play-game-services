@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-val pluginName = "GodotPlayGameServices"
+val pluginName = "GodotPlayGamesServices"
 
 val pluginPackageName = "com.jacobibanez.plugin.android.godotplaygameservices"
 

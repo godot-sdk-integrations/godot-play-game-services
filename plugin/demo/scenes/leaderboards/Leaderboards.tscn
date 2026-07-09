@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/leaderboards/Leaderboards.gd" id="1_gf0nl"]
 [ext_resource type="Theme" uid="uid://bmm3mvq11y045" path="res://theme.tres" id="1_r8adt"]
-[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="3_vug45"]
+[ext_resource type="Script" path="res://addons/GodotPlayGamesServices/scripts/leaderboards/leaderboards_client.gd" id="3_vug45"]
 
 [node name="Leaderboards" type="Control"]
 layout_mode = 3

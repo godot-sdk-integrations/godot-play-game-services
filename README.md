@@ -47,11 +47,11 @@ If you want to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) fi
 1. Download the latest release from the [Godot Asset Store](https://store-beta.godotengine.org/asset/jacob-ibanez-sanchez/google-play-games-services-for-godot/) or the [GitHub releases](https://github.com/godot-sdk-integrations/godot-play-game-services/releases).
 2. Extract and copy the plugin to your project's `addons` folder. The final structure should look like:
 ```
-[Project root]/addons/GodotPlayGameServices/
+[Project root]/addons/GodotPlayGamesServices/
 ```
 On macOS, Safari may automatically extract `addons.zip` into a `GodotPlayGameServices` folder. If that happens, create an `addons` folder in your project root if it does not exist, then move the extracted `GodotPlayGameServices` folder inside it so the final path still matches the structure above.
 3. Open your project in Godot.
-4. In main menu, go to `Project > Project Settings > Plugins`, and enable **GodotPlayGameServices**.
+4. In main menu, go to `Project > Project Settings > Plugins`, and enable **GodotPlayGamesServices**.
 
 ## Philosophy of the plugin
 This plugin has been revamped since version 3.0. Before, the plugin created several autoloads, one per each feature of the Play Games API (sign in, leaderboards, snapshots, etc.). Now the plugin follows the Godot philosophy of using Nodes, therefore the autoloads have been converted to Nodes, except the main `GodotPlayGamesServices` one, which now requires manual initialization. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
@@ -74,7 +74,7 @@ After making your changes, or if you just want to manually build the plugin, fol
 ```
 ./gradlew assemble
 ```
-The output files can be found in [`plugin/demo/addons`](plugin/demo/addons). The plugin itself, that you can copy to your project to use, is in the [`plugin/demo/addons/GodotPlayGameServices`](plugin/demo/addons/GodotPlayGameServices), just copy the whole `GodotPlayGameServices` folder into the `addons` folder of your Godot project and activate the plugin in `Project` -> `Project Settings...` -> `Plugins`
+The output files can be found in [`plugin/demo/addons`](plugin/demo/addons). The plugin itself, that you can copy to your project to use, is in the [`plugin/demo/addons/GodotPlayGamesServices`](plugin/demo/addons/GodotPlayGamesServices), just copy the whole `GodotPlayGamesServices` folder into the `addons` folder of your Godot project and activate the plugin in `Project` -> `Project Settings...` -> `Plugins`
 
 ### Testing the plugin
 You can also use the included [Godot demo project](plugin/demo) to test the built Android plugin.

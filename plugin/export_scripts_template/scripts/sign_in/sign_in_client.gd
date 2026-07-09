@@ -1,4 +1,4 @@
-@icon("res://addons/GodotPlayGameServices/assets/icons/sign_in_client.svg")
+@icon("res://addons/GodotPlayGamesServices/assets/icons/sign_in_client.svg")
 class_name PlayGamesSignInClient extends Node
 ## Client with sign in functionality.
 ##
@@ -22,11 +22,11 @@ func _ready() -> void:
 	_connect_signals()
 
 func _connect_signals() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.userAuthenticated.connect(func(is_authenticated: bool):
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.userAuthenticated.connect(func(is_authenticated: bool):
 			user_authenticated.emit(is_authenticated)
 		)
-		GodotPlayGameServices.android_plugin.serverSideAccessRequested.connect(func(token: String):
+		GodotPlayGamesServices.android_plugin.serverSideAccessRequested.connect(func(token: String):
 			server_side_access_requested.emit(token)
 		)
 
@@ -35,15 +35,15 @@ func _connect_signals() -> void:
 ## [br]
 ## The method emits the [signal user_authenticated] signal.
 func is_authenticated() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.isAuthenticated()
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.isAuthenticated()
 
 ## Use this method to provide a manual way to the user for signing in.[br]
 ## [br]
 ## The method emits the [signal user_authenticated] signal.
 func sign_in() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.signIn()
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.signIn()
 
 ## Requests server-side access to Play Games Services for the currently signed-in player.
 ## When requested, an authorization code is returned that can be used by your server to exchange
@@ -55,5 +55,5 @@ func sign_in() -> void:
 ## [param force_refresh_token]: If true, when the returned authorization code is exchanged, a refresh
 ## token will be included in addition to an access token.
 func request_server_side_access(server_client_id: String, force_refresh_token: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.requestServerSideAccess(server_client_id, force_refresh_token)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.requestServerSideAccess(server_client_id, force_refresh_token)

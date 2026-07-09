@@ -1,4 +1,4 @@
-@icon("res://addons/GodotPlayGameServices/assets/icons/events_client.svg")
+@icon("res://addons/GodotPlayGamesServices/assets/icons/events_client.svg")
 class_name PlayGamesEventsClient extends Node
 ## Client with events functionality.
 ##
@@ -25,8 +25,8 @@ func _ready() -> void:
 ## [param event_id]: The event ID to increment.[br]
 ## [param increment_amount]: The amount to increment by. Must be greater than or equal to 0.
 func increment_event(event_id: String, increment_amount: int) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.incrementEvent(event_id, increment_amount)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.incrementEvent(event_id, increment_amount)
 
 ## Loads a list of events for the currently signed-in player.[br]
 ## [br]
@@ -35,8 +35,8 @@ func increment_event(event_id: String, increment_amount: int) -> void:
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.
 func load_events(force_reload: bool) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadEvents(force_reload)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadEvents(force_reload)
 
 ## Loads a specific list of events for the currently signed-in player.[br]
 ## [br]
@@ -46,13 +46,13 @@ func load_events(force_reload: bool) -> void:
 ## to clear the cache.[br]
 ## [param event_ids]: The IDs of the events to load.
 func load_events_by_ids(force_reload: bool, event_ids: Array[String]) -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadEventsByIds(force_reload, event_ids)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.loadEventsByIds(force_reload, event_ids)
 
 func _connect_signals() -> void:
-	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.eventsLoaded.connect(_on_events_loaded)
-		GodotPlayGameServices.android_plugin.eventsLoadedByIds.connect(_on_events_loadeds_by_ids)
+	if GodotPlayGamesServices.android_plugin:
+		GodotPlayGamesServices.android_plugin.eventsLoaded.connect(_on_events_loaded)
+		GodotPlayGamesServices.android_plugin.eventsLoadedByIds.connect(_on_events_loadeds_by_ids)
 
 func _on_events_loaded(json_data: String) -> void:
 	events_loaded.emit(_parse_events(json_data))
@@ -61,7 +61,7 @@ func _on_events_loadeds_by_ids(json_data: String) -> void:
 	events_loaded.emit(_parse_events(json_data))
 
 func _parse_events(json_data: String) -> Array[PlayGamesEvent]:
-	var safe_array := GodotPlayGameServices.json_marshaller.safe_parse_array(json_data)
+	var safe_array := GodotPlayGamesServices.json_marshaller.safe_parse_array(json_data)
 	var events: Array[PlayGamesEvent] = []
 	for dictionary: Dictionary in safe_array:
 		events.append(PlayGamesEvent.new(dictionary))
