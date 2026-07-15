@@ -3,12 +3,12 @@ package com.jacobibanez.plugin.android.godotplaygameservices.players
 import com.google.android.gms.games.Player
 import com.google.android.gms.games.PlayerLevel
 import com.google.android.gms.games.PlayerLevelInfo
-import com.jacobibanez.plugin.android.godotplaygameservices.utils.toStringAndSave
+import com.jacobibanez.plugin.android.godotplaygameservices.utils.toStringAndMaybeSave
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 
 /** @suppress */
-fun fromPlayer(godot: Godot, player: Player) = Dictionary().apply {
+fun fromPlayer(godot: Godot, player: Player, loadImages: Boolean = true) = Dictionary().apply {
     put("displayName", player.displayName)
     put("playerId", player.playerId)
     put("retrievedTimestamp", player.retrievedTimestamp)
@@ -30,40 +30,44 @@ fun fromPlayer(godot: Godot, player: Player) = Dictionary().apply {
     player.bannerImageLandscapeUri?.let {
         put(
             "bannerImageLandscapeUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "bannerImageLandscapeUri",
-                player.playerId
+                player.playerId,
+                loadImages
             )
         )
     }
     player.bannerImagePortraitUri?.let {
         put(
             "bannerImagePortraitUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "bannerImagePortraitUri",
-                player.playerId
+                player.playerId,
+                loadImages
             )
         )
     }
     player.hiResImageUri?.let {
         put(
             "hiResImageUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "hiResImageUri",
-                player.playerId
+                player.playerId,
+                loadImages
             )
         )
     }
     player.iconImageUri?.let {
         put(
             "iconImageUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "iconImageUri",
-                player.playerId
+                player.playerId,
+                loadImages
             )
         )
     }

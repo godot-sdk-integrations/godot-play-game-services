@@ -56,7 +56,7 @@ class AchievementsProxy(
         }
     }
 
-    fun loadAchievements(forceReload: Boolean) {
+    fun loadAchievements(forceReload: Boolean, loadImages: Boolean = true) {
         Log.d(tag, "Loading achievements")
         achievementsClient.load(forceReload).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -68,7 +68,7 @@ class AchievementsProxy(
                 val achievementsCount = safeBuffer.count
                 val achievements: List<Dictionary> =
                     if (achievementsCount > 0) {
-                        safeBuffer.map { fromAchievement(godot, it) }.toList()
+                        safeBuffer.map { fromAchievement(godot, it, loadImages) }.toList()
                     } else {
                         emptyList()
                     }
