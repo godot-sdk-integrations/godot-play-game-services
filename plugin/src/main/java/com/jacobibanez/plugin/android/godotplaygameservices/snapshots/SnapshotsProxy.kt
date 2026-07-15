@@ -16,6 +16,7 @@ import com.google.android.gms.games.snapshot.SnapshotMetadataChange
 import com.google.gson.Gson
 import com.jacobibanez.plugin.android.godotplaygameservices.BuildConfig.GODOT_PLUGIN_NAME
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SnapshotSignals.conflictEmitted
+import com.jacobibanez.plugin.android.godotplaygameservices.signals.SnapshotSignals.snapshotDeleted
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SnapshotSignals.gameLoaded
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SnapshotSignals.gameSaved
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SnapshotSignals.snapshotsLoaded
@@ -171,37 +172,48 @@ class SnapshotsProxy(
     }
 
     fun deleteSnapshot(snapshotId: String) {
-        var isDeleted = false
-        snapshotsClient.load(true).addOnSuccessListener { annotatedData ->
-            annotatedData.get()?.let { buffer ->
-                buffer
-                    .toList()
-                    .firstOrNull { it.snapshotId == snapshotId }?.let { snapshotMetadata ->
-                        Log.d(tag, "Deleting snapshot with id $snapshotId")
-                        snapshotsClient.delete(snapshotMetadata).addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.d(
-                                    tag,
-                                    "Snapshot with id $snapshotId deleted successfully."
-                                )
-                                isDeleted = true
-                            } else {
-                                Log.e(
-                                    tag,
-                                    "Failed to delete snapshot with id $snapshotId. Cause: ${task.exception}",
-                                    task.exception
-                                )
-                            }
-                        }
+        Log.d(tag, "Attempting to delete snapshot with id: $snapshotId")
+        snapshotsClient.load(true)
+            .addOnSuccessListener { annotatedData ->
+                annotatedData.get()?.let { buffer ->
+                    val snapshotMetadata = buffer.toList()
+                        .firstOrNull { it.snapshotId == snapshotId }
+
+                    if (snapshotMetadata != null) {
+                        performDelete(snapshotMetadata)
+                    } else {
+                        Log.w(tag, "Snapshot with id $snapshotId not found")
+                        emitDeleteResult(false, snapshotId)
                     }
+                }
             }
-        }
-        if (!isDeleted) {
-            Log.d(tag, "Snapshot with id $snapshotId not found!")
-        }
+            .addOnFailureListener { e ->
+                Log.e(tag, "Failed to load snapshots before delete", e)
+                emitDeleteResult(false, snapshotId)
+            }
     }
 
-    private fun handleConflict(origin: String, conflict: SnapshotConflict?) {
+    private fun performDelete(metadata: SnapshotMetadata) {
+        snapshotsClient.delete(metadata)
+            .addOnSuccessListener { deletedSnapshotId ->
+                Log.d(tag, "Successfully deleted snapshot: $deletedSnapshotId")
+                emitDeleteResult(true, deletedSnapshotId)
+            }
+            .addOnFailureListener { e ->
+                Log.e(tag, "Failed to delete snapshot ${metadata.snapshotId}", e)
+                emitDeleteResult(false, metadata.snapshotId)
+            }
+    }
+
+    private fun emitDeleteResult(success: Boolean, snapshotId: String) {
+        emitSignal(
+            godot,
+            GODOT_PLUGIN_NAME,
+            snapshotDeleted,
+            success,
+            snapshotId
+        )
+    }    private fun handleConflict(origin: String, conflict: SnapshotConflict?) {
         conflict?.let {
             val snapshot = it.snapshot
             val fileName = snapshot.metadata.uniqueName

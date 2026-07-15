@@ -28,6 +28,12 @@ signal conflict_emitted(conflict: PlayGamesSnapshotConflict)
 ## [param snapshots]: The list of snapshots for the current signed in player.
 signal snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata])
 
+## Signal emitted after calling the [method delete_snapshot] method.[br]
+## [br]
+## [param snapshots]: status of delete operation and snapshot id.
+signal on_snapshot_deleted_signal(status: bool, deleted_snapshot_id: String)
+
+
 func _ready() -> void:
 	if GodotPlayGameServices.android_plugin:
 		GodotPlayGameServices.android_plugin.gameSaved.connect(
@@ -51,6 +57,9 @@ func _ready() -> void:
 			for dictionary: Dictionary in safe_array:
 				snapshots.append(PlayGamesSnapshotMetadata.new(dictionary))
 			snapshots_loaded.emit(snapshots)
+		)
+		GodotPlayGameServices.android_plugin.snapshotDeleted.connect(func(status: bool, id: String):
+			on_snapshot_deleted_signal.emit(status, id)
 		)
 
 ## Opens a new window to display the saved games for the current player. If you select
