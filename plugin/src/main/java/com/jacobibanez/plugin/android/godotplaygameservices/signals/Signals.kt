@@ -27,7 +27,7 @@ fun getSignals(): MutableSet<SignalInfo> = mutableSetOf(
     SnapshotSignals.gameLoaded,
     SnapshotSignals.conflictEmitted,
     SnapshotSignals.snapshotsLoaded,
-
+    SnapshotSignals.snapshotDeleted,
     EventsSignals.eventsLoaded,
     EventsSignals.eventsLoadedByIds,
 
@@ -60,7 +60,7 @@ object SignInSignals {
 object AchievementsSignals {
     /**
      * This signal is emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.incrementAchievement],
-     * [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.unlockAchievement] 
+     * [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.unlockAchievement]
      * or [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.setAchievementSteps] methods.
      *
      * @return `true` if the achievement is unlocked. `false` otherwise. Also returns the id of the achievement.
@@ -194,6 +194,19 @@ object SnapshotSignals {
      * @return A [List] of [com.google.android.gms.games.snapshot.SnapshotMetadata](https://developers.google.com/android/reference/com/google/android/gms/games/snapshot/SnapshotMetadata).
      */
     val snapshotsLoaded = SignalInfo("snapshotsLoaded", String::class.java)
+
+    /**
+     * This signal is emitted when calling the [deleteSnapshot] method.
+     *
+     * @return
+     * - delete status: success (true or false)
+     * - snapshotId: of deleted snapshot
+     */
+    val snapshotDeleted = SignalInfo(
+        "snapshotDeleted",
+        Boolean::class.javaObjectType,
+        String::class.java
+    )
 }
 
 /**
