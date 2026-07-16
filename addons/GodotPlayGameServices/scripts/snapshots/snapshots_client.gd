@@ -31,7 +31,7 @@ signal snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata])
 ## Signal emitted after calling the [method delete_snapshot] method.[br]
 ## [br]
 ## [param snapshots]: status of delete operation and snapshot id.
-signal on_snapshot_deleted_signal(status: bool, deleted_snapshot_id: String)
+signal snapshot_deleted(status: bool, deleted_snapshot_id: String)
 
 
 func _ready() -> void:
@@ -59,7 +59,7 @@ func _ready() -> void:
 			snapshots_loaded.emit(snapshots)
 		)
 		GodotPlayGameServices.android_plugin.snapshotDeleted.connect(func(status: bool, id: String):
-			on_snapshot_deleted_signal.emit(status, id)
+			snapshot_deleted.emit(status, id)
 		)
 
 ## Opens a new window to display the saved games for the current player. If you select
@@ -119,6 +119,8 @@ func load_snapshots(force_reload: bool) -> void:
 		GodotPlayGameServices.android_plugin.loadSnapshots(force_reload)
 
 ## Deletes a snapshot. This will delete the data of the snapshot locally and on the server.[br]
+## [br]
+## This method emits the [signal snapshot_deleted] signal.[br]
 ## [br]
 ## [param snapshot_id]: The snapshot identifier.
 func delete_snapshot(snapshot_id: String) -> void:
