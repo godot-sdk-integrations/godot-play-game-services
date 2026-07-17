@@ -63,10 +63,12 @@ func increment_achievement(achievement_id: String, amount: int) -> void:
 ## [param force_reload]: If true, this call will clear any locally cached 
 ## data and attempt to fetch the latest data from the server. Send it set to [code]true[/code]
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
-## to clear the cache.
-func load_achievements(force_reload: bool) -> void:
+## to clear the cache.[br]
+## [param load_images]: If true, achievement and player image URIs will be downloaded and replaced
+## with local [code]user://[/code] file paths. If false, the original URI strings are returned.
+func load_achievements(force_reload: bool, load_images: bool = true) -> void:
 	if GodotPlayGameServices.android_plugin:
-		GodotPlayGameServices.android_plugin.loadAchievements(force_reload)
+		GodotPlayGameServices.android_plugin.loadAchievements(force_reload, load_images)
 
 ## Use this method to reveal a hidden achievement to the current signed in player. 
 ## If the achievement is already unlocked, this method will have no effect.[br]

@@ -3,16 +3,16 @@ package com.jacobibanez.plugin.android.godotplaygameservices.achievements
 import com.google.android.gms.games.achievement.Achievement
 import com.google.android.gms.games.achievement.Achievement.TYPE_INCREMENTAL
 import com.jacobibanez.plugin.android.godotplaygameservices.players.fromPlayer
-import com.jacobibanez.plugin.android.godotplaygameservices.utils.toStringAndSave
+import com.jacobibanez.plugin.android.godotplaygameservices.utils.toStringAndMaybeSave
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 
 /** @suppress */
-fun fromAchievement(godot: Godot, achievement: Achievement) = Dictionary().apply {
+fun fromAchievement(godot: Godot, achievement: Achievement, loadImages: Boolean = true) = Dictionary().apply {
     put("achievementId", achievement.achievementId)
     put("name", achievement.name)
     put("description", achievement.description)
-    put("player", fromPlayer(godot, achievement.player))
+    put("player", fromPlayer(godot, achievement.player, loadImages))
     put("xpValue", achievement.xpValue)
     put("currentSteps", if (achievement.type == TYPE_INCREMENTAL) achievement.currentSteps else 0)
     put("totalSteps", if (achievement.type == TYPE_INCREMENTAL) achievement.totalSteps else 0)
@@ -28,20 +28,22 @@ fun fromAchievement(godot: Godot, achievement: Achievement) = Dictionary().apply
     achievement.revealedImageUri?.let {
         put(
             "revealedImageUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "revealedImageUri",
-                achievement.achievementId
+                achievement.achievementId,
+                loadImages
             )
         )
     }
     achievement.unlockedImageUri?.let {
         put(
             "unlockedImageUri",
-            it.toStringAndSave(
+            it.toStringAndMaybeSave(
                 godot,
                 "unlockedImageUri",
-                achievement.achievementId
+                achievement.achievementId,
+                loadImages
             )
         )
     }
