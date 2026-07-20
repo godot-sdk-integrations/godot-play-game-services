@@ -1,3 +1,7 @@
+## v3.4.0
+### Create `snapshotDeleted` signal and improve `deleteSnapshot` method
+Collaborator @o-tokar created a [Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/120) to improve the `deleteSnapshot` operation and adding a `snapshotDeleted` signal to it.
+
 ## v3.3.0
 ### Create `addons` folder in the root of the project
 To follow the usual structure of Godot plugins, I moved the generated sources of the plugin to the `addons` folder. I also added the [.gitattributes](.gitattributes) file so the only available folder to download from the Godot Editor is the folder with the plugin.
