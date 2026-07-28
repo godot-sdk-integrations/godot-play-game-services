@@ -127,10 +127,13 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
      *
      * @param forceReload If true, this call will clear any locally cached data and attempt to fetch
      * the latest data from the server.
+     * @param loadImages If true (the default), achievement and nested player image URIs will be
+     * downloaded and replaced with local file paths. If false, image downloads are skipped and the
+     * JSON contains the original URI strings.
      */
     @UsedByGodot
-    fun loadAchievements(forceReload: Boolean) =
-        achievementsProxy.loadAchievements(forceReload)
+    fun loadAchievements(forceReload: Boolean, loadImages: Boolean = true) =
+        achievementsProxy.loadAchievements(forceReload, loadImages)
 
     /**
      * Use this method to reveal a hidden achievement to the current signed player. If the achievement
