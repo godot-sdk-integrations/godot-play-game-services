@@ -15,6 +15,9 @@ signal achievement_unlocked(is_unlocked: bool, achievement_id: String)
 ## Signal emitted after calling the [method load_achievements] method.[br]
 ## [br]
 ## [param achievements]: An array containing all the achievements for the game.
+## Image URI properties contain local [code]user://[/code] file paths when
+## [method load_achievements] is called with [code]load_images[/code] set to [code]true[/code],
+## or the original URI strings when it is [code]false[/code].
 ## The array will be empty if there was an error loading the achievements.
 signal achievements_loaded(achievements: Array[PlayGamesAchievement])
 
@@ -64,8 +67,9 @@ func increment_achievement(achievement_id: String, amount: int) -> void:
 ## data and attempt to fetch the latest data from the server. Send it set to [code]true[/code]
 ## the first time, and [code]false[/code] in subsequent calls, or when you want
 ## to clear the cache.[br]
-## [param load_images]: If true, achievement and player image URIs will be downloaded and replaced
-## with local [code]user://[/code] file paths. If false, the original URI strings are returned.
+## [param load_images]: If [code]true[/code] (the default), achievement and player image URIs will be
+## downloaded and replaced with local [code]user://[/code] file paths. If [code]false[/code], image
+## downloads are skipped and the original URI strings are returned.
 func load_achievements(force_reload: bool, load_images: bool = true) -> void:
 	if GodotPlayGameServices.android_plugin:
 		GodotPlayGameServices.android_plugin.loadAchievements(force_reload, load_images)

@@ -18,12 +18,12 @@ enum PlayGamesPlayerFriendStatus {
 	UNKNOWN = -1 ## The currently signed in player's friend status with this player is unknown.
 }
 
-var banner_image_landscape_uri: String ## Banner image of the player in landscape.
-var banner_image_portrait_uri: String ## Banner image of the player in portrait.
+var banner_image_landscape_uri: String ## Local [code]user://[/code] path to the player's landscape banner image, or the original URI string when image loading is disabled.
+var banner_image_portrait_uri: String ## Local [code]user://[/code] path to the player's portrait banner image, or the original URI string when image loading is disabled.
 var friends_list_visibility_status: FriendsListVisibilityStatus ## Visibility status of this player's friend list.
 var display_name: String ## The display name of the player.
-var hi_res_image_uri: String ## The hi-res image of the player.
-var icon_image_uri: String ## The icon image of the player.
+var hi_res_image_uri: String ## Local [code]user://[/code] path to the player's hi-res image, or the original URI string when image loading is disabled.
+var icon_image_uri: String ## Local [code]user://[/code] path to the player's icon image, or the original URI string when image loading is disabled.
 var level_info: PlayGamesPlayerLevelInfo ## Information about the player level.
 var player_id: String ## The player id.
 var friend_status: PlayGamesPlayerFriendStatus ## The friend status of this player with the signed in player.
