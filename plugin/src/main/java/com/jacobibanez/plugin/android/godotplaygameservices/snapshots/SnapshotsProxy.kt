@@ -111,11 +111,13 @@ class SnapshotsProxy(
                         return@addOnCompleteListener
                     }
                     dataOrConflict.data?.let { snapshot ->
+                        val game = Gson().toJson(fromSnapshot(godot, snapshot))
+                        snapshotsClient.discardAndClose(snapshot)
                         emitSignal(
                             godot,
                             GODOT_PLUGIN_NAME,
                             gameLoaded,
-                            Gson().toJson(fromSnapshot(godot, snapshot))
+                            game
                         )
                     }
                 } else {
