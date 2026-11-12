@@ -7,6 +7,7 @@ import org.godotengine.godot.plugin.SignalInfo
 fun getSignals(): MutableSet<SignalInfo> = mutableSetOf(
     SignInSignals.userAuthenticated,
     SignInSignals.serverSideAccessRequested,
+    SignInSignals.serverSideAccessWithScopesRequested,
 
     AchievementsSignals.achievementUnlocked,
     AchievementsSignals.achievementsLoaded,
@@ -52,6 +53,19 @@ object SignInSignals {
      * @return An OAuth 2.0 authorization code as a string.
      */
     var serverSideAccessRequested = SignalInfo("serverSideAccessRequested", String::class.java)
+
+    /**
+     * This signal is emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.requestServerSideAccessWithScopes] method.
+     *
+     * @return An OAuth 2.0 authorization code as a string, and the additional scopes granted by the
+     * player, as the integer values of the [com.jacobibanez.plugin.android.godotplaygameservices.signin.AuthScope] enum.
+     * The granted scopes can be empty if the player declined the consent screen.
+     */
+    val serverSideAccessWithScopesRequested = SignalInfo(
+        "serverSideAccessWithScopesRequested",
+        String::class.java,
+        IntArray::class.java
+    )
 }
 
 /**

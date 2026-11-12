@@ -8,6 +8,18 @@ class_name PlayGamesSignInClient extends Node
 ## a check at startup, so usually you don't have to use these methods. Use them only 
 ## to provide a manual way for the user to sign in.
 
+## Additional OAuth scopes that can be requested with the [method request_server_side_access_with_scopes]
+## method.[br]
+## [br]
+## The [code]GAMES_LITE[/code] and [code]DRIVE_APPFOLDER[/code] scopes are always requested,
+## so they are not part of this enum. Any of the scopes below has to be granted by the
+## player in a consent screen, so they might not be granted at all.
+enum AuthScope {
+	EMAIL = 0, ## Requests access to the email address of the player.
+	PROFILE = 1, ## Requests access to the basic profile information of the player.
+	OPEN_ID = 2, ## Requests an OpenID Connect ID token, which is returned together with the access token when your server exchanges the authorization code.
+}
+
 ## Signal emitted after calling the [method is_authenticated] method.[br]
 ## [br]
 ## [param is_authenticated]: Indicates if the user is authenticated or not.
@@ -17,6 +29,14 @@ signal user_authenticated(is_authenticated: bool)
 ## [br]
 ## [param token]: The OAuth 2.0 authorization code as a string.
 signal server_side_access_requested(token:String)
+
+## Signal emitted after calling the [method request_server_side_access_with_scopes] method.[br]
+## [br]
+## [param token]: The OAuth 2.0 authorization code as a string. It is empty if the
+## request failed.[br]
+## [param granted_scopes]: The additional scopes granted by the player. It is empty if
+## the player declined the consent screen or if the request failed.
+signal server_side_access_with_scopes_requested(token: String, granted_scopes: Array[AuthScope])
 
 func _ready() -> void:
 	_connect_signals()
@@ -28,6 +48,12 @@ func _connect_signals() -> void:
 		)
 		GodotPlayGameServices.android_plugin.serverSideAccessRequested.connect(func(token: String):
 			server_side_access_requested.emit(token)
+		)
+		GodotPlayGameServices.android_plugin.serverSideAccessWithScopesRequested.connect(func(token: String, granted_scopes: PackedInt32Array):
+			var scopes: Array[AuthScope] = []
+			for scope: int in granted_scopes:
+				scopes.append(scope as AuthScope)
+			server_side_access_with_scopes_requested.emit(token, scopes)
 		)
 
 ## Use this method to check if the user is already authenticated. If the user is authenticated,
@@ -57,3 +83,29 @@ func sign_in() -> void:
 func request_server_side_access(server_client_id: String, force_refresh_token: bool) -> void:
 	if GodotPlayGameServices.android_plugin:
 		GodotPlayGameServices.android_plugin.requestServerSideAccess(server_client_id, force_refresh_token)
+
+## Requests server-side access to Play Games Services for the currently signed-in player,
+## asking the player to also grant the given additional scopes.[br]
+## [br]
+## Works like the [method request_server_side_access] method, but requesting the
+## [constant AuthScope.OPEN_ID] scope makes the authorization code exchange return an
+## OpenID Connect ID token as well, so your server can identify the player with the same
+## [code]sub[/code] a browser sign in would give you.[br]
+## [br]
+## The player can decline the consent screen, in which case none of the additional scopes
+## are granted, so check the [code]granted_scopes[/code] of the emitted signal before
+## relying on any of them.[br]
+## [br]
+## The method emits the [signal server_side_access_with_scopes_requested] signal.[br]
+## [br]
+## [param server_client_id]: The client ID of the server that will perform the authorization code flow exchange.[br]
+## [param force_refresh_token]: If true, when the returned authorization code is exchanged, a refresh
+## token will be included in addition to an access token.[br]
+## [param scopes]: The additional scopes to request. See the [enum AuthScope] enum.
+func request_server_side_access_with_scopes(
+	server_client_id: String,
+	force_refresh_token: bool,
+	scopes: Array[AuthScope]
+) -> void:
+	if GodotPlayGameServices.android_plugin:
+		GodotPlayGameServices.android_plugin.requestServerSideAccessWithScopes(server_client_id, force_refresh_token, scopes)
