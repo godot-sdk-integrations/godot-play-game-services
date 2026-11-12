@@ -126,6 +126,13 @@ class SignInProxy(
                     "Failed to request server side access with scopes. Cause: ${task.exception}",
                     task.exception
                 )
+                emitSignal(
+                    godot,
+                    BuildConfig.GODOT_PLUGIN_NAME,
+                    serverSideAccessWithScopesRequested,
+                    "",
+                    IntArray(0)
+                )
             }
         }
     }

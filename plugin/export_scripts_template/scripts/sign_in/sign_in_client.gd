@@ -15,9 +15,9 @@ class_name PlayGamesSignInClient extends Node
 ## so they are not part of this enum. Any of the scopes below has to be granted by the
 ## player in a consent screen, so they might not be granted at all.
 enum AuthScope {
-	EMAIL, ## Requests access to the email address of the player.
-	PROFILE, ## Requests access to the basic profile information of the player.
-	OPEN_ID, ## Requests an OpenID Connect ID token, which is returned together with the access token when your server exchanges the authorization code.
+	EMAIL = 0, ## Requests access to the email address of the player.
+	PROFILE = 1, ## Requests access to the basic profile information of the player.
+	OPEN_ID = 2, ## Requests an OpenID Connect ID token, which is returned together with the access token when your server exchanges the authorization code.
 }
 
 ## Signal emitted after calling the [method is_authenticated] method.[br]
@@ -32,9 +32,10 @@ signal server_side_access_requested(token:String)
 
 ## Signal emitted after calling the [method request_server_side_access_with_scopes] method.[br]
 ## [br]
-## [param token]: The OAuth 2.0 authorization code as a string.[br]
+## [param token]: The OAuth 2.0 authorization code as a string. It is empty if the
+## request failed.[br]
 ## [param granted_scopes]: The additional scopes granted by the player. It is empty if
-## the player declined the consent screen.
+## the player declined the consent screen or if the request failed.
 signal server_side_access_with_scopes_requested(token: String, granted_scopes: Array[AuthScope])
 
 func _ready() -> void:
