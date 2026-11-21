@@ -43,9 +43,9 @@ class AndroidExportPlugin extends EditorExportPlugin:
 			print("Please add your game-id here: [Project > Export > Android > godot_play_game_services/game_id].")
 			return
 
-		var file := FileAccess.open("android/build/res/values/strings.xml", FileAccess.WRITE)
+		var res_dir_path = "android/build/dataLib/src/main/res/" if Engine.get_version_info().hex >= 0x040800 else "android/build/res/"
+		var file := FileAccess.open(res_dir_path + "values/strings.xml", FileAccess.WRITE)
 		file.store_string("<?xml version=\"1.0\" encoding=\"utf-8\"?><resources><string translatable=\"false\" name=\"game_services_project_id\">%s</string></resources>" % id)
-		[]
 
 		print("[{plugin_name}] added game-id {id} to [values/strings.xml]".format({"plugin_name": _plugin_name, "id": id}))
 
