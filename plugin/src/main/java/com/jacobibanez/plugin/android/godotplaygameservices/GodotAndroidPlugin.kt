@@ -1,9 +1,7 @@
 package com.jacobibanez.plugin.android.godotplaygameservices
 
-import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import android.view.View
 import com.google.android.gms.games.PlayGamesSdk
 import com.jacobibanez.plugin.android.godotplaygameservices.achievements.AchievementsProxy
 import com.jacobibanez.plugin.android.godotplaygameservices.events.EventsProxy
@@ -36,14 +34,6 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
     /** @suppress */
     override fun getPluginSignals(): MutableSet<SignalInfo> {
         return getSignals()
-    }
-
-    /** @suppress */
-    override fun onMainCreate(activity: Activity?): View? {
-        Thread.setDefaultUncaughtExceptionHandler { _, exception ->
-            Log.e(pluginName, "Uncaught Exception! ${exception.message}")
-        }
-        return super.onMainCreate(activity)
     }
 
     /** @suppress */
