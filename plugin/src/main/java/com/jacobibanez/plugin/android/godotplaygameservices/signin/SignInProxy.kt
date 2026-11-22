@@ -5,6 +5,7 @@ import com.google.android.gms.games.GamesSignInClient
 import com.google.android.gms.games.PlayGames
 import com.jacobibanez.plugin.android.godotplaygameservices.BuildConfig
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SignInSignals.serverSideAccessRequested
+import com.jacobibanez.plugin.android.godotplaygameservices.signals.SignInSignals.serverSideAccessWithScopesRequested
 import com.jacobibanez.plugin.android.godotplaygameservices.signals.SignInSignals.userAuthenticated
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.GodotPlugin.emitSignal
@@ -80,5 +81,59 @@ class SignInProxy(
                     )
                 }
             }
+    }
+
+    fun signInRequestServerSideAccessWithScopes(
+        serverClientId: String,
+        forceRefreshToken: Boolean,
+        scopes: IntArray
+    ) {
+        val requestedScopes = scopes.toList().mapNotNull { scope ->
+            val authScope = AuthScope.fromValue(scope)
+            if (authScope == null) {
+                Log.w(tag, "Ignoring unknown auth scope with value $scope")
+            }
+            authScope
+        }
+        Log.d(
+            tag,
+            "Requesting server side access for client id $serverClientId with refresh token $forceRefreshToken and scopes $requestedScopes"
+        )
+        gamesSignInClient.requestServerSideAccess(
+            serverClientId,
+            forceRefreshToken,
+            requestedScopes.map { it.gamesAuthScope }
+        ).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val grantedScopes = task.result.grantedScopes
+                    .mapNotNull { AuthScope.fromGamesAuthScope(it) }
+                    .map { it.value }
+                    .toIntArray()
+                Log.d(
+                    tag,
+                    "Access granted to server side for user: $serverClientId with scopes ${grantedScopes.toList()}"
+                )
+                emitSignal(
+                    godot,
+                    BuildConfig.GODOT_PLUGIN_NAME,
+                    serverSideAccessWithScopesRequested,
+                    task.result.authCode,
+                    grantedScopes
+                )
+            } else {
+                Log.e(
+                    tag,
+                    "Failed to request server side access with scopes. Cause: ${task.exception}",
+                    task.exception
+                )
+                emitSignal(
+                    godot,
+                    BuildConfig.GODOT_PLUGIN_NAME,
+                    serverSideAccessWithScopesRequested,
+                    "",
+                    IntArray(0)
+                )
+            }
+        }
     }
 }

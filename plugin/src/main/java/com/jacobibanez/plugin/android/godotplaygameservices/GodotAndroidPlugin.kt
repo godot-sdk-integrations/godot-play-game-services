@@ -108,6 +108,37 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
         signInProxy.signInRequestServerSideAccess(serverClientId, forceRefreshToken)
 
     /**
+     * Requests server-side access to Play Games Services for the currently signed-in player, asking
+     * the player to also grant the given additional scopes.
+     *
+     * When requested, an authorization code is returned that can be used by your server to exchange
+     * for an access token that can be used by your server to access the Play Games Services web APIs.
+     * Requesting the [com.jacobibanez.plugin.android.godotplaygameservices.signin.AuthScope.OPEN_ID]
+     * scope makes that exchange return an OpenID Connect ID token as well.
+     *
+     * The player can decline the consent screen, in which case none of the additional scopes are
+     * granted, so check the granted scopes emitted by the [com.jacobibanez.plugin.android.godotplaygameservices.signals.SignInSignals.serverSideAccessWithScopesRequested]
+     * signal before relying on any of them.
+     *
+     * @param serverClientId The client ID of the server that will perform the authorization code flow exchange.
+     * @param forceRefreshToken If true, when the returned authorization code is exchanged, a refresh
+     * token will be included in addition to an access token.
+     * @param scopes The additional scopes to request, as the integer values of the
+     * [com.jacobibanez.plugin.android.godotplaygameservices.signin.AuthScope] enum. Unknown values
+     * are ignored.
+     */
+    @UsedByGodot
+    fun requestServerSideAccessWithScopes(
+        serverClientId: String,
+        forceRefreshToken: Boolean,
+        scopes: IntArray
+    ) = signInProxy.signInRequestServerSideAccessWithScopes(
+        serverClientId,
+        forceRefreshToken,
+        scopes
+    )
+
+    /**
      * Use this method to increment a given achievement in the given amount. For normal achievements,
      * use the [unlockAchievement] method instead.
      *
