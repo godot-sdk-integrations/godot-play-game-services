@@ -9,7 +9,6 @@ import com.google.android.gms.games.PlayGames
 import com.google.android.gms.games.SnapshotsClient
 import com.google.android.gms.games.SnapshotsClient.EXTRA_SNAPSHOT_METADATA
 import com.google.android.gms.games.SnapshotsClient.RESOLUTION_POLICY_HIGHEST_PROGRESS
-import com.google.android.gms.games.SnapshotsClient.RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED
 import com.google.android.gms.games.SnapshotsClient.SnapshotConflict
 import com.google.android.gms.games.snapshot.SnapshotMetadata
 import com.google.android.gms.games.snapshot.SnapshotMetadataChange
@@ -102,7 +101,7 @@ class SnapshotsProxy(
 
     fun loadGame(fileName: String, createIfNotFound: Boolean) {
         Log.d(tag, "Loading snapshot with name $fileName.")
-        snapshotsClient.open(fileName, createIfNotFound, RESOLUTION_POLICY_MOST_RECENTLY_MODIFIED)
+        snapshotsClient.open(fileName, createIfNotFound, RESOLUTION_POLICY_HIGHEST_PROGRESS)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val dataOrConflict = task.result
