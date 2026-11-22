@@ -72,6 +72,8 @@ object AchievementsSignals {
      * This signal is emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.loadAchievements] method.
      *
      * @return A JSON with a list of [com.google.android.gms.games.achievement.Achievement](https://developers.google.com/android/reference/com/google/android/gms/games/achievement/Achievement).
+     * Image URI fields contain local file paths when `loadImages` is true, or the original URI
+     * strings when `loadImages` is false.
      */
     val achievementsLoaded = SignalInfo("achievementsLoaded", String::class.java)
 

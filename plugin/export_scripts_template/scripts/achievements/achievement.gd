@@ -23,8 +23,8 @@ var player: PlayGamesPlayer ## The player associated to this achievement.
 var type: Type ## The achievement type.
 var state: State ## The achievement state.
 var xp_value: int ## The XP value of this achievement.
-var revealed_image_uri: String ## A URI that can be used to load the achievement's revealed image icon.
-var unlocked_image_uri: String ## A URI that can be used to load the achievement's unlocked image icon.
+var revealed_image_uri: String ## Local [code]user://[/code] path to the achievement's revealed image icon, or the original URI string when image loading is disabled.
+var unlocked_image_uri: String ## Local [code]user://[/code] path to the achievement's unlocked image icon, or the original URI string when image loading is disabled.
 ## The number of steps this user has gone toward unlocking this achievement;
 ## only applicable for [code]TYPE_INCREMENTAL[/code] achievement types.
 var current_steps: int
